@@ -1,3 +1,5 @@
+//Login & Register pages have form for data submission (with support of react-validation library). They call methods from auth.service to make login/register request.
+
 import React, { useState, useRef } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -13,31 +15,32 @@ const required = (value) => {
     );
   }
 };
-const Login = (props) => {
+const Login = () => {
   const form = useRef();
-  const CheckBtn = useRef();
-  const [username, setUsername] = useState(" ");
-  const [password, setPassword] = useState(" ");
+  const checkBtn = useRef();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState(" ");
-  const onChangeUsername = (e) => {
-    const username = e.target.value;
-    setUsername(username);
+  const [message, setMessage] = useState("");
+
+  const onChangeEmail = (e) => {
+    const email = e.target.value;
+    setEmail(email);
   };
-  const onChangeUsername = (e) => {
-    const username = e.target.value;
-    setUsername(username);
+  const onChangePassword = (e) => {
+    const password = e.target.value;
+    setPassword(password);
   };
   const handleLogin = (e) => {
     e.preventDefault();
+    console.log("logging in")
     setMessage("");
     setLoading(true);
     form.current.validateAll();
-    if (CheckBtn.current.context._errors.length === 0) {
-      AuthService.login(username, password).then(
+    if (checkBtn.current.context._errors.length === 0) {
+      AuthService.login(email, password).then(
         () => {
-          props.history.push("/profile");
-          window.location.reload();
+          window.location.assign("/profile");
         },
         (error) => {
           const resMessage =
@@ -65,13 +68,13 @@ const Login = (props) => {
 
         <Form onSubmit={handleLogin} ref={form}>
           <div className="form-group">
-            <label htmlFor="username">username</label>
+            <label htmlFor="email">Email</label>
             <Input
               type="text"
               className="form-control"
-              name="username"
-              value={username}
-              onChange={onChangeUsername}
+              name="email"
+              value={email}
+              onChange={onChangeEmail}
               validations={[required]}
             />
           </div>
@@ -86,20 +89,8 @@ const Login = (props) => {
               validations={[required]}
             />
           </div>
-
           <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <Input
-              type="password"
-              className="form-control"
-              name="password"
-              value={password}
-              onChange={onChangePassword}
-              validations={[required]}
-            />
-          </div>
-          <div className="form-group">
-            <button className="btn btn-primary btn-block" disabled={loading}>
+            <button className="btn btn-primary btn-block" disabled={loading} onClick={handleLogin}>
               {loading && (
                 <span className="spinner-border spinner-border-sm"></span>
               )}

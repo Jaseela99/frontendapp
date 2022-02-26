@@ -45,11 +45,11 @@ const vpassword = (value)=>{
 const Register = (props)=>{
     const form =useRef()
     const CheckBtn = useRef()
-    const [username,setUsername] = useState(" ")
-    const [email,setEmail] = useState(" ")
-    const [password,setPassword] = useState(" ")
-    const [successful,setSuccessful] = useState(" ")
-    const [message,setMessage] = useState(" ")
+    const [username,setUsername] = useState("")
+    const [email,setEmail] = useState("")
+    const [password,setPassword] = useState("")
+    const [successful,setSuccessful] = useState("")
+    const [message,setMessage] = useState("")
 
     const onChangeUsername = (e) =>{
         const username = e.target.value

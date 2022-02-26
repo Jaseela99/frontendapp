@@ -1,16 +1,18 @@
-import axios from "axios"
-const API_URL = "http://localhost:8080/api/auth/"
+//auth.service methods use axios to make HTTP requests. Its also store or get JWT from Browser Local Storage inside these methods.
 
-const register = (username,email,password)=>{
-return axios.post(API_URL+"signup",{
-    username,
+import axios from "axios"
+const API_URL = "https://imgur-backend-jaseela.herokuapp.com/"
+
+const register = (fullName,email,password)=>{
+return axios.post(API_URL + "register",{
+    fullName,
     email,
     password,
 })
 };
-const login = (username,password)=>{
-    return axios.post (API_URL+"signin",{
-        username,
+const login = (email,password)=>{
+    return axios.post (API_URL + "login",{
+        email,
         password,
     })
     .then((response)=>{
