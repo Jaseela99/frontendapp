@@ -48,7 +48,7 @@ const Register = (props)=>{
     const [username,setUsername] = useState("")
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
-    const [successful,setSuccessful] = useState("")
+    const [successful,setSuccessful] = useState(false)
     const [message,setMessage] = useState("")
 
     const onChangeUsername = (e) =>{
@@ -66,7 +66,7 @@ const Register = (props)=>{
 
     const handleRegister = (e) =>{
         e.preventDefault()
-        setMessage(" ")
+        setMessage("")
         setSuccessful(false)
         form.current.validateAll()
         if(CheckBtn.current.context._errors.length === 0 ){

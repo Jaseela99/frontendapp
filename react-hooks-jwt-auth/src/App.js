@@ -9,6 +9,9 @@ import Register from "./components/Register"
 import Profile from "./components/Profile"
 import Home from "./components/Home"
 import BoardUser from "./components/BoardUser"
+import UserImage from "./components/UserImage"
+import ImageById from "./components/ImageById"
+import UploadImage from "./components/UploadImage";
 
 function App(){
   const [currentUser,setCurrentUser] = useState(undefined)
@@ -16,16 +19,17 @@ function App(){
     const user = AuthService.getCurrentUser()
     if (user){
       setCurrentUser(user)
+      console.log(user)
     }
   },[])
-  const logOut = ()=>{
+  const LogOut = ()=>{
     AuthService.logout()
   }
   return (
     <div>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <Link to={"/"} className="navbar-brand">
-          Jaseela
+          Imgur
         </Link>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
@@ -40,26 +44,27 @@ function App(){
              </Link>
            </li>
          )} 
-        </div>
-        {currentUser ?(
-          <div className="nav-bar ml-auto">
-            <li className="nav-item">
+         {currentUser &&( 
+         <li className="nav-item">
               <Link to={"/profile"} className="nav-link">
-                {currentUser.username}
+                {currentUser.data.fullName}
               </Link>
-            </li>
+            </li>)}
+        {currentUser ?(
+          //<div className="nav-bar ml-auto">
+           
            <li className="nav-item" >
-             <a href="/login" className="nav-link" onClick={logOut}>
-               LogOut
+             <a href="/login" className="nav-link" onClick={LogOut}>
+               Logout
              </a>
            </li>
-          </div>
+          //</div>
 
         ):(
           <div className="navbar-nav ml-auto">
             <li className="nav-item">
               <Link to={"/login"} className="nav-link">
-                Login
+                Sign In
               </Link>
             </li>
             <li className= "nav-item">
@@ -69,14 +74,17 @@ function App(){
             </li>
           </div>
         )}
+        </div>
       </nav>
       <div className="container mt-3">
         <Routes>
-          <Route exact path ="/" element={<Home/>}/>
+          <Route exact path ="/" element={<BoardUser/>}/>
+          <Route exact path ="/:id" element={<ImageById/>}/>
           <Route exact path ="/login" element={<Login/>}/>
           <Route exact path ="/register" element={<Register/>}/>
           <Route exact path ="/profile" element={<Profile/>}/>
-          <Route path ="/user" element={<BoardUser/>}/>
+          <Route path ="/user" element={<UserImage/>}/>
+          <Route path ="/modal" element={<UploadImage/>}/>
         </Routes>
       </div>
     </div>
