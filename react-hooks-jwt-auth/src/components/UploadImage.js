@@ -3,7 +3,9 @@ import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {Form,Button} from "react-bootstrap"
 import axios from "axios"
-//import userService from "../services/user.service";
+const user =JSON.parse(localStorage.getItem("user"))
+const API_URL ="https://imgur-backend-jaseela.herokuapp.com/"
+
 
 const required = (value) => {
     if (!value) {
@@ -19,7 +21,7 @@ function UploadImage() {
     const form = useRef()
     const [category,setCategory] = useState("")
     const [path,setPath] = useState("")
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   
   const onChangeCategory = (e) => {
     const category = e.target.value;
@@ -43,14 +45,12 @@ function UploadImage() {
   const handleSubmit = async (e) =>{
       e.preventDefault()
       console.log(category,path)
-      let user =JSON.parse(localStorage.getItem("user"))
-      const response = await axios.post("https://imgur-backend-jaseela.herokuapp.com/image/",{category,path},{headers:{"x-access-token":user.accessToken}})
-    console.log(response)
+      axios.post(API_URL+"image/",{category,path}, {headers:{"x-access-token":user.accessToken}}).then(()=>{hideModal()})
     }
 
   return (
     <div>
-      <button onClick={showModal}>Display Modal</button>
+      <button onClick={showModal}>Upload Image</button>
       <Modal show={isOpen}>
         <Modal.Body>
           <Form onSubmit={handleSubmit} ref={form}>

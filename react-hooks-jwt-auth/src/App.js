@@ -7,11 +7,10 @@ import AuthService from "./services/auth.service"
 import Login from "./components/Login"
 import Register from "./components/Register"
 import Profile from "./components/Profile"
-import Home from "./components/Home"
 import BoardUser from "./components/BoardUser"
 import UserImage from "./components/UserImage"
 import ImageById from "./components/ImageById"
-import UploadImage from "./components/UploadImage";
+
 
 function App(){
   const [currentUser,setCurrentUser] = useState(undefined)
@@ -19,7 +18,6 @@ function App(){
     const user = AuthService.getCurrentUser()
     if (user){
       setCurrentUser(user)
-      console.log(user)
     }
   },[])
   const LogOut = ()=>{
@@ -27,8 +25,8 @@ function App(){
   }
   return (
     <div>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <Link to={"/"} className="navbar-brand">
+      <nav className="navbar navbar-expand navbar-dark bg-dark mx-auto">
+        <Link to={"/"} className="navbar-brand mx-5">
           Imgur
         </Link>
         <div className="navbar-nav mr-auto">
@@ -51,14 +49,14 @@ function App(){
               </Link>
             </li>)}
         {currentUser ?(
-          //<div className="nav-bar ml-auto">
+    
            
            <li className="nav-item" >
              <a href="/login" className="nav-link" onClick={LogOut}>
                Logout
              </a>
            </li>
-          //</div>
+        
 
         ):(
           <div className="navbar-nav ml-auto">
@@ -84,7 +82,7 @@ function App(){
           <Route exact path ="/register" element={<Register/>}/>
           <Route exact path ="/profile" element={<Profile/>}/>
           <Route path ="/user" element={<UserImage/>}/>
-          <Route path ="/modal" element={<UploadImage/>}/>
+          
         </Routes>
       </div>
     </div>

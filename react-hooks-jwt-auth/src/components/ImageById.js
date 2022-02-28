@@ -2,21 +2,15 @@ import React, { useState, useEffect } from "react";
 import UserService from "../services/user.service";
 import { useParams } from "react-router-dom";
 import axios from "axios"
+const user =JSON.parse(localStorage.getItem("user"))
+const API_URL ="https://imgur-backend-jaseela.herokuapp.com/"
 function ImageById() {
     const { id } = useParams();
   const [image, setImage] = useState({});
-  useEffect(async()=>{
+  useEffect(()=>{
 
-    let user = JSON.parse(localStorage.getItem("user"));
-    console.log(user.accessToken);
-    let response = await axios.get(
-      "https://imgur-backend-jaseela.herokuapp.com/image/"+id,
-      { headers: { "x-access-token": user.accessToken } }
-    );
-    console.log(response.data.data);
-    setImage(response.data.data);
    
-        /* UserService.getImageById(id).then(
+    axios.get(API_URL+"image/"+id , {headers:{"x-access-token":user.accessToken}}).then(
           (response) => {
             setImage(response.data.data);
             console.log(response.data.data);
@@ -31,7 +25,7 @@ function ImageById() {
               error.toString();
             setImage(_content);
           }
-        ); */
+        ); 
         },[])
 
   return (
