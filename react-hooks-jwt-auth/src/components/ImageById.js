@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import UserService from "../services/user.service";
 import { useParams } from "react-router-dom";
 import axios from "axios"
 const user =JSON.parse(localStorage.getItem("user"))

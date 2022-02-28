@@ -1,10 +1,6 @@
 import React,{useEffect,useState} from 'react'
-import UserService from '../services/user.service'
 import "bootstrap/dist/css/bootstrap.min.css";
-import {Modal,Button} from "react-bootstrap"
 import UploadImage from './UploadImage'
-import {useParams} from "react-router-dom"
-import userService from '../services/user.service';
 import axios from "axios"
 const user =JSON.parse(localStorage.getItem("user"))
 const API_URL ="https://imgur-backend-jaseela.herokuapp.com/"
@@ -58,14 +54,6 @@ function UserImage() {
           />
            <button onClick={()=>handleDelete(cont._id)}>Delete</button>
            <button onClick={()=>toggleLike(cont._id)}>Like {cont.likeCount}</button>
-          {/*  < Modal show={isOpen}>
-        <Modal.Body>Are you sure to delete this image?</Modal.Body>
-    
-            <Modal.Footer>
-          <button onClick={hideModal}>No</button>
-          <button onClick={()=>handleDelete(cont)}>Yes</button>
-        </Modal.Footer>
-      </Modal>  */}
         </div>
       ))}
   </div>

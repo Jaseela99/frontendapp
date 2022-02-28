@@ -17,10 +17,10 @@ const getImageById = (id)=>{
     return axios.get(API_URL + "image/"+id, {headers:authHeader()})
 }
 const uploadImage=(category,path)=>{
-    return axios.post(API_URL + "image", {headers:authHeader()})  
+    return axios.post(API_URL + "image",{category,path}, {headers:authHeader()})  
 }
 const deleteImage=(id)=>{
-    return axios.post(API_URL + "image/"+id, {headers:authHeader()})  
+    return axios.delete(API_URL + "image/"+id, {headers:authHeader()})  
 }
 export default {
     uploadImage,
