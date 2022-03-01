@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {Form,Button} from "react-bootstrap"
 import axios from "axios"
 const user =JSON.parse(localStorage.getItem("user"))
-const API_URL ="https://imgur-backend-jaseela.herokuapp.com/"
+const API_URL ="http://localhost:8000/"
 
 
 const required = (value) => {
@@ -45,12 +45,14 @@ function UploadImage() {
   const handleSubmit = async (e) =>{
       e.preventDefault()
       console.log(category,path)
-      axios.post(API_URL+"image/",{category,path}, {headers:{"x-access-token":user.accessToken}}).then(()=>{hideModal()})
+      axios.post(API_URL+"image/",{category,path}, {headers:{"x-access-token":user.accessToken}}).then(()=>{
+      window.location.reload()
+      hideModal()})
     }
 
   return (
     <div>
-      <button onClick={showModal}>Upload Image</button>
+      <button className="upload"onClick={showModal}>Upload Image</button>
       <Modal show={isOpen}>
         <Modal.Body>
           <Form onSubmit={handleSubmit} ref={form}>
@@ -81,8 +83,7 @@ function UploadImage() {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <button onClick={hideModal}>Cancel</button>
-          <button>Save</button>
+          <button className="btn" onClick={hideModal}>Cancel</button>
         </Modal.Footer>
       </Modal>
     </div>

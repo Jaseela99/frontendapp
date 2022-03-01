@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import UploadImage from './UploadImage'
 import axios from "axios"
 const user =JSON.parse(localStorage.getItem("user"))
-const API_URL ="https://imgur-backend-jaseela.herokuapp.com/"
+const API_URL ="http://localhost:8000/"
 
 function UserImage() {
 
@@ -50,10 +50,10 @@ function UserImage() {
           <img
             src={`${cont.category}/${cont.path}`}
             alt={cont.path}
-            className="img-fluid w-100 h-100" 
+            className="img-fluid w-100 h-75" 
           />
-           <button onClick={()=>handleDelete(cont._id)}>Delete</button>
-           <button onClick={()=>toggleLike(cont._id)}>Like {cont.likeCount}</button>
+           <button className="btn" onClick={()=>handleDelete(cont._id)}>Delete</button>
+           <button className="btn" onClick={()=>toggleLike(cont._id)}>Like {cont.likeCount}</button>
         </div>
       ))}
   </div>

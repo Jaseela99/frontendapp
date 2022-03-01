@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios"
 const user =JSON.parse(localStorage.getItem("user"))
-const API_URL ="https://imgur-backend-jaseela.herokuapp.com/"
+const API_URL ="http://localhost:8000/"
 function ImageById() {
     const { id } = useParams();
   const [image, setImage] = useState({});

@@ -1,4 +1,5 @@
-//Login & Register pages have form for data submission (with support of react-validation library). They call methods from auth.service to make login/register request.
+//Login & Register pages have form for data submission (with support of react-validation library).
+// They call methods from auth.service to make login/register request.
 import React, { useState, useRef } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -22,21 +23,27 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
+  //value of email is set 
   const onChangeEmail = (e) => {
     const email = e.target.value;
     setEmail(email);
   };
+
+  //value of password is set
   const onChangePassword = (e) => {
     const password = e.target.value;
     setPassword(password);
   };
+
+  //it is executed when login button is clicked
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log("logging in")
+    console.log("logging in");
     setMessage("");
     setLoading(true);
     form.current.validateAll();
     if (checkBtn.current.context._errors.length === 0) {
+      //value is set
       AuthService.login(email, password).then(
         () => {
           window.location.assign("/");
@@ -46,10 +53,10 @@ const Login = () => {
             (error.response &&
               error.response.data &&
               error.response.data.message) ||
-              error.message ||
-             error.toString();
-            setLoading(false);
-           setMessage(resMessage);
+            error.message ||
+            error.toString();
+          setLoading(false);
+          setMessage(resMessage);
         }
       );
     } else {
@@ -89,7 +96,11 @@ const Login = () => {
             />
           </div>
           <div className="form-group">
-            <button className="btn btn-primary btn-block" disabled={loading} onClick={handleLogin}>
+            <button
+              className="btn btn-primary btn-block"
+              disabled={loading}
+              onClick={handleLogin}
+            >
               {loading && (
                 <span className="spinner-border spinner-border-sm"></span>
               )}

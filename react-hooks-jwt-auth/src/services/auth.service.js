@@ -1,7 +1,9 @@
 //auth.service methods use axios to make HTTP requests. Its also store or get JWT from Browser Local Storage inside these methods.
 
 import axios from "axios"
-const API_URL = "https://imgur-backend-jaseela.herokuapp.com/"
+const API_URL = "http://localhost:8000/"
+
+//register function API
 
 const register = (fullName,email,password)=>{
 return axios.post(API_URL + "register",{
@@ -10,6 +12,9 @@ return axios.post(API_URL + "register",{
     password,
 })
 };
+
+//login function API
+
 const login = (email,password)=>{
     return axios.post (API_URL + "login",{
         email,
@@ -22,9 +27,12 @@ const login = (email,password)=>{
         return response.data;
     })
 }
+//logout function
 const logout = () =>{
     localStorage.removeItem("user")
 }
+
+//getting current user from local storage
 const getCurrentUser = ()=>{
     return JSON.parse(localStorage.getItem("user"))
 }
